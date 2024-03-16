@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumir API con Fetch</title>
+</head>
+<body>
+    <div id="result"></div>
+    <button onclick="vamos2()">Enviar his</button>
+    <script>
+      const vamos2 = () => {
+  // URL del archivo JSON
+  const jsonUrl = './objeto_envio_nuevo.json';
+
+  // Realizar solicitud fetch para obtener los datos del archivo JSON
+  fetch(jsonUrl)
+    .then(response => {
+    
+      if (!response.ok) {
+        throw new Error('Hubo un problema al cargar los datos.');
+      }
+      return response.json();
+      console.log(response)
+    })
+    .then(datos => {
+      console.log(datos)
+     
+      const url = 'http://dpidesalud.minsa.gob.pe:18080/mcs-sihce-hisminsa/integracion/v1.0/paquete/actualizar';
+
+      // Configuración de la solicitud POST con los datos obtenidos del archivo JSON
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos) // Enviar los datos obtenidos del archivo JSON
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Hubo un problema con la solicitud.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Respuesta:', data);
+          alert('Datos enviados exitosamente.');
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Ocurrió un error al enviar los datos.');
+        }); /**/
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Ocurrió un error al cargar los datos.');
+    });
+};
+        const vamos=()=>{
+      const url = 'http://dpidesalud.minsa.gob.pe:18080/mcs-sihce-hisminsa/integracion/v1.0/paquete/actualizar'; // Reemplaza con tu URL de destino
+      const jsonUrl = objeto_envio_nuevo.json;
+          console.log(jsonUrl)
+      fetch(url, {
+        mode:  'no-cors',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',         
+             
+        },
+        body: JSON.stringify(jsonUrl)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Hubo un problema con la solicitud.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Respuesta:', data);
+        alert('Datos enviados exitosamente.');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Ocurrió un error al enviar los datos.');
+      });
+    }
+        /*
+        // URL de la API que deseas consumir
+        const apiUrl = 'http://dpidesalud.minsa.gob.pe:18080/mcs-sihce-hisminsa/integracion/v1.0/paquete/actualizar';
+
+        // Función para realizar la solicitud a la API
+        async function fetchData() {
+            try {
+                const response = await fetch(apiUrl, {
+    mode: 'no-cors'
+  });
+                if (!response.ok) {
+                    throw new Error('Error al cargar los datos');
+                }
+                const data = await response.json();
+                displayData(data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Función para mostrar los datos en el HTML
+        function displayData(data) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<h2>Datos de la API:</h2>';
+            const ul = document.createElement('ul');
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.id}: ${item.name}`;
+                ul.appendChild(li);
+            });
+            resultDiv.appendChild(ul);
+        }
+
+        // Llamar a la función fetchData al cargar la página
+        fetchData();*/
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{
+	"cita": {
+		"numeroafiliacion": "",
+		"fechaatencion": "20230519",
+		"estadoregistro": "A",
+		"items": [
+			{
+				"tipodiagnostico": "D",
+				"codigo": "M169",
+				"tipoitem": "CX",
+				"codigolote":""
+			},
+			{
+				"labs": [
+					{
+						"codigo": "",
+						"valor": "1"
+					}
+				],
+				"tipodiagnostico": "D",
+				"codigo": "M170",
+				"tipoitem": "CX",
+				"codigolote":""
+			},
+			{
+				"labs": [
+					{
+						"codigo": "",
+						"valor": "BOM"
+					}
+				],
+				"tipodiagnostico": "D",
+				"codigo": "90669",
+				"tipoitem": "CP",
+				"codigolote":""
+			},
+			{
+				"labs": [
+					{
+						"codigo": "",
+						"valor": "2"
+					},
+					{
+						"codigo": "",
+						"valor": "G"
+					}
+				],
+				"tipodiagnostico": "D",
+				"codigo": "D1330",
+				"tipoitem": "CP",
+				"codigolote":""
+			},
+			{
+				"labs": [
+					{
+						"codigo": "",
+						"valor": "IMC"
+					},
+					{
+						"codigo": "",
+						"valor": "CR"
+					},
+					{
+						"codigo": "",
+						"valor": "DVC"
+					}
+				],
+				"tipodiagnostico": "D",
+				"codigo": "Z006",
+				"tipoitem": "CX",
+				"codigolote":""
+			}
+		],
+		"idups": "303101",
+		"idestablecimiento": "5945",
+		"idtipedadregistro": "A",
+		"edadregistro": "60",
+		"annioedad": "60",
+		"mesedad": "10",
+		"diaedad": "13",
+		"idturno": "M",
+		"fgdiag": "11",
+		"componente": "",
+		"idfinanciador": "2",
+		"idtipcondestab" : "N",
+		"idtipcondserv" : "N",
+		"fechaultimaregla" : "20220911",
+		"idcondiciongestante" : 2,
+		"examenfisico": {
+			"peso": "1.00",
+			"talla": "2.00",
+			"hemoglobina": "3.00",
+            "perimetrocefalico": "40",
+			"perimetroabdominal":"500",
+			"pesopregestacional":"71"
+		}
+	},
+	"personal_registra": {
+		"nrodocumento": "10130417",
+		"apematerno": "ESTELA",
+		"idpais": "PER",
+		"idprofesion": "29",
+		"fechanacimiento": "19750711",
+		"nombres": "ROBERTO ANGEL",
+		"idtipodoc": "1",
+		"apepaterno": "TELLO",
+		"idsexo": "M",
+		"idcondicion": "8"
+	},
+	"personal_atiende": {
+		"nrodocumento": "142650477",
+		"apematerno": "TORTOLEDO",
+		"idpais": "VEN",
+		"idprofesion": "29",
+		"fechanacimiento": "19000101",
+		"nombres": "MARIA DE JESUS",
+		"idtipodoc": "4",
+		"apepaterno": "SULBARAN",
+		"idsexo": "M",
+		"idcondicion": "7"
+	},
+	"paciente": {
+		"nrodocumento": "22097335",
+		"apematerno": "MACOTELA",
+		"idflag": "3",
+		"nombres": "JOSEFINA",
+		"nrohistoriaclinica": "0855762",
+		"idtipodoc": "1",
+		"apepaterno": "FERNANDEZ",
+		"idetnia": "58",
+		"fechanacimiento": "19621127",
+		"idestablecimiento": "5945",
+		"idpais": "PER",
+		"idsexo": "F"
+	}
+}
