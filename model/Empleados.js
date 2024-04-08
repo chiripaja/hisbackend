@@ -22,7 +22,8 @@ const Empleados = SIGHBD.define('Empleados', {
     sexo:DataTypes.STRING,
     IdTipoEmpleado:DataTypes.INTEGER,
     IdCondicionTrabajo:DataTypes.STRING,
-
+    ClaveVWeb:DataTypes.STRING,
+    Usuario:DataTypes.STRING,
     FechaNacimientoFormattedMedico: {
         type: DataTypes.VIRTUAL,
         get() {

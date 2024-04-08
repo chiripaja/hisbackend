@@ -198,16 +198,6 @@ const findByFechas = async (req, res = response) => {
         let fechainicio2=moment(req.body.start,'YYYY-MM-DDTHH:mm:ss.SSS[Z]')
         const fechainicioformate=fechainicio2.startOf('day').format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
     
-   /*   const data=await atenciones.findAll({
-            where:{
-                FyHFinal:{
-                    [Sequelize.Op.between]:[fechainicioformate,fechafinformat]
-                }
-            }            
-            
-        })
-*/
-
 
 
 
@@ -307,8 +297,8 @@ const findByFechas = async (req, res = response) => {
                     idcondiciongestante: "",
 
                     examenfisico: {
-                        peso: data.triaje ? data.triaje?.TriajePeso : "",
-                        talla: data.triaje ? data.triaje?.TriajeTalla : "",
+                        peso: data.triaje?.TriajePeso  ? data.triaje?.TriajePeso : "",
+                        talla: data.triaje?.TriajeTalla ? data.triaje?.TriajeTalla : "",
                         hemoglobina: "",
                         perimetrocefalico: "",
                         perimetroabdominal: "",

@@ -12,7 +12,7 @@ app.use(express.static('public'))
 app.use(express.json())
 app.use(express.static('public'))
 app.use('/api/his',require('./router/his'))
-
+app.use('/api/empleado',require('./router/empleado'))
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`) 
