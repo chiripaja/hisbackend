@@ -101,6 +101,23 @@ const Pacientes = SIGHBD.define('Pacientes', {
         },
     },
 
+    edadregistro:{
+        type: DataTypes.VIRTUAL,
+        get() {
+            const fechaNacimiento = this.getDataValue('FechaNacimiento');
+            if (fechaNacimiento) {
+                const fechaActualUTC = new Date(this.get('getFechaActualUTC'));
+                const aniostranscurridos = (fechaActualUTC.getFullYear() - fechaNacimiento.getFullYear());
+                if(aniostranscurridos===0){
+                    return "1";
+                }
+                return aniostranscurridos;
+            } else {
+                return null;
+            }
+        },
+    },
+
     IdPaisNacimiento: {
         type: DataTypes.STRING,
     },

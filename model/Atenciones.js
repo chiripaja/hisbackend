@@ -7,6 +7,7 @@ const Servicios = require('./Servicios');
 const FactOrdenServicio = require('./FactOrdenServicio');
 const atencionesCE = require('./atencionesCE');
 const his_cuenta_cita = require('./his_cuenta_cita');
+const RecetaCabecera = require('./RecetaCabecera');
 
 
 const atenciones = SIGHBD.define('atenciones', {
@@ -153,6 +154,13 @@ atenciones.hasOne(his_cuenta_cita, {
     foreignKey: 'idAtencion',
     targetKey: 'idAtencion'
 })
+
+
+atenciones.hasMany(RecetaCabecera, {
+    foreignKey: 'idCuentaAtencion',
+    targetKey: 'idAtencion'
+})
+
 
 
 module.exports = atenciones

@@ -9,6 +9,7 @@ const Servicios=SIGHBD.define('Servicios',{
       },
       codigoServicioSuSalud: DataTypes.STRING,
       codigoServicioHIS:DataTypes.STRING,
+      Nombre:DataTypes.STRING,
 },{
     tableName: 'Servicios',
     timestamps: false 
