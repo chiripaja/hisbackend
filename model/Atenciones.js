@@ -8,6 +8,7 @@ const FactOrdenServicio = require('./FactOrdenServicio');
 const atencionesCE = require('./atencionesCE');
 const his_cuenta_cita = require('./his_cuenta_cita');
 const RecetaCabecera = require('./RecetaCabecera');
+const his_cuenta_cita_prueba = require('./his_cuenta_cita_prueba');
 
 
 const atenciones = SIGHBD.define('atenciones', {
@@ -150,7 +151,13 @@ atenciones.hasOne(atencionesCE, {
     targetKey: 'idAtencion'
 })
 
+
 atenciones.hasOne(his_cuenta_cita, {
+    foreignKey: 'idAtencion',
+    targetKey: 'idAtencion'
+})
+
+atenciones.hasOne(his_cuenta_cita_prueba, {
     foreignKey: 'idAtencion',
     targetKey: 'idAtencion'
 })

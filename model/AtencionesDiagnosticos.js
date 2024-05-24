@@ -12,7 +12,8 @@ const AtencionesDiagnosticos = SIGHBD.define('AtencionesDiagnosticos', {
     },
     IdAtencion:  DataTypes.INTEGER,
     IdSubclasificacionDx:DataTypes.INTEGER,
-    IdDiagnostico:DataTypes.INTEGER
+    IdDiagnostico:DataTypes.INTEGER,
+    labConfHIS:DataTypes.STRING
 }, {
     tableName: 'AtencionesDiagnosticos',
     timestamps: false
