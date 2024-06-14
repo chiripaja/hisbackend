@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const { SIGHBD_EXTERNA, SIGHBD } = require('../sequilize/sequilize');
 
 
-const atencionesCE = SIGHBD_EXTERNA.define('triaje', {
+const atencionesCE = SIGHBD.define('triaje', {
     idAtencion: {
         type: DataTypes.INTEGER,
         primaryKey: true,

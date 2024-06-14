@@ -21,7 +21,7 @@ const AuthEmpleado = async (req, res = response) => {
        
         res.status(200).json(token)
     } catch (error) {
-        res.status.json("entro error")
+        res.status(500).send({ success: false, message: error.message });        
     }
 }
 

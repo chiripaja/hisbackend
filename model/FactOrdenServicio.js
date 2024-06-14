@@ -14,9 +14,10 @@ const FactOrdenServicio = SIGHBD.define('FactOrdenServicio', {
     tableName: 'FactOrdenServicio',
     timestamps: false
 })
-FactOrdenServicio.belongsTo(FacturacionServicioFinanciamientos,{
-    foreignKey:'IdOrden'
-})
 
+
+FactOrdenServicio.hasMany(FacturacionServicioFinanciamientos,{
+    foreignKey:'IdOrden'
+})/**/
 
 module.exports = FactOrdenServicio

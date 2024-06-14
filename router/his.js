@@ -1,14 +1,16 @@
 // host + /api/his
 const { Router } = require('express')
-const { findAll, enviarhis, findByFechas, ver,findByFechasTotal, enviarApiHisData, findByFechasPrueba, enviarhisprueba } = require('../controller/hisController')
+const { findAll, enviarhis, findByFechas, ver,findByFechasTotal, enviarApiHisData, findByFechasPrueba, enviarhisprueba, findByFechasPrueba2 } = require('../controller/hisController')
 const router=Router()
 
-router.get('/',findAll)
-      .post('/findByFechas',findByFechasPrueba)//prueba
-      //.post('/findByFechas',findByFechas)//produccion
+router//.get('/',findAll)
+
+       .post('/findByFechas',findByFechasPrueba2)//prueba
+     //.post('/findByFechas',findByFechas)//produccion
       //.post('/findByFechas',findByFechasTotal)
-      .post('/',enviarhisprueba)//prueba
-      //.post('/',enviarhis)//produccion
+
+     // .post('/',enviarhisprueba)//prueba
+      .post('/',enviarhis)//produccion
       .get('/ver',ver)
       .post('/enviarApiHisData',enviarApiHisData)
       
