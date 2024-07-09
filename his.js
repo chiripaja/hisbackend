@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const port = 4000
+require('dotenv').config();
+console.log(process.env.PASSWORD)
 //const portproxy =4001
 //const cors_proxy  = require('cors-anywhere');
 const cors = require('cors');

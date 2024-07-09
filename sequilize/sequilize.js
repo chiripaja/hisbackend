@@ -1,8 +1,7 @@
 const { Sequelize } = require('sequelize');
-
-const SIGHBD = new Sequelize('SIGH', 'SA', 'Heves.2016', {
- host: '192.168.210.70',
- //host: '192.168.210.74',
+require('dotenv').config();
+const SIGHBD = new Sequelize(process.env.DATABASE, process.env.USER, process.env.PASSWORD, {
+ host: process.env.HOST,
   dialect:  'mssql',
   dialectOptions: {
     options: {

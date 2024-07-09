@@ -1101,7 +1101,7 @@ const findByFechasPrueba2 = async (req, res = response) => {
                         if (data.Codigo != '99203') {
                             tipodiagnostico.push({
                                 tipodiagnostico: "D",
-                                codigo: data.Codigo,
+                                codigo: data.CodMINSA,
                                 tipoitem: "CP",
                                 codigolote: "",
                             })
