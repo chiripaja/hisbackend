@@ -1089,7 +1089,7 @@ const findByFechasPrueba2 = async (req, res = response) => {
                  }*/
             }
         });
-
+     
 
         const dataPlana = paciente.map((data) => {
             const tipodiagnostico = [];
