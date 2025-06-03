@@ -43,6 +43,9 @@ const Pacientes = SIGHBD.define('Pacientes', {
     IdTipoSexo: {
         type: DataTypes.STRING,
     },
+    DireccionDomicilio:{
+        type:DataTypes.STRING,
+    },
     NombreCompleto: {
         type: DataTypes.VIRTUAL,
         get() {

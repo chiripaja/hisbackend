@@ -984,7 +984,7 @@ const findByFechasPrueba2 = async (req, res = response) => {
                     where: {
 
                         IdServicio: [
-                            37,
+                           37,
                             1407,
                             160,
                             1363,
@@ -1050,6 +1050,25 @@ const findByFechasPrueba2 = async (req, res = response) => {
                             68,
                             1356,
                             150,
+                            1622,
+                            1628,
+                            1630,
+                            1629,
+                            1639,
+                            1640,
+                            74,
+                            1529,
+                            1416,
+                            1417,
+                            1467,
+                            1541,
+                            1564,
+                            1633,
+                            329,
+1414,
+1415,
+1439,
+1525
                         ],
                     }
                 },
@@ -1081,12 +1100,10 @@ const findByFechasPrueba2 = async (req, res = response) => {
                 }
             ],
             where: {
-                FyHFinal: {
+                /**/FyHFinal: {
                     [Sequelize.Op.between]: [fechainicioformate, fechafinformat]
                 },
-                /* IdAtencion: {
-                     [Sequelize.Op.in]: ['187612']
-                 }*/
+                
             }
         });
      
@@ -1098,7 +1115,8 @@ const findByFechasPrueba2 = async (req, res = response) => {
                 if(idEmpleadoMedico===FacturacionServicioFinanciamiento.IdUsuario){
                 FacturacionServicioFinanciamiento.FacturacionServicioFinanciamientos.forEach((data) => {
                     data.FactCatalogoServicios.forEach((data) => {
-                        if (data.Codigo != '99203') {
+                       
+                        if (data?.Codigo != '99203') {
                             tipodiagnostico.push({
                                 tipodiagnostico: "D",
                                 codigo: data.CodMINSA,
@@ -1175,7 +1193,7 @@ const findByFechasPrueba2 = async (req, res = response) => {
                 personal_registra: {
                     nrodocumento: data.Medico?.Empleado.DNI ? data.Medico?.Empleado.DNI.trim() : "",
                     apematerno: data.Medico?.Empleado.ApellidoMaterno,
-                    idpais: data.Medico?.Empleado.Paise ? data.Medico?.Empleado.Paise.Codigo : "PER",
+                    idpais: data.Medico?.Empleado.Paise ? data.Medico?.Empleado?.Paise?.Codigo : "PER",
                     idprofesion: data.Medico?.Empleado.TiposEmpleado.TipoEmpleadoHIS,
                     fechanacimiento: data.Medico?.Empleado.FechaNacimientoFormattedMedico,
                     nombres: data.Medico?.Empleado.Nombres.trim(),
@@ -1187,7 +1205,7 @@ const findByFechasPrueba2 = async (req, res = response) => {
                 personal_atiende: {
                     nrodocumento: data.Medico?.Empleado.DNI ? data.Medico?.Empleado.DNI.trim() : "",
                     apematerno: data.Medico?.Empleado.ApellidoMaterno,
-                    idpais: data.Medico?.Empleado.Paise ? data.Medico?.Empleado.Paise.Codigo : "PER",
+                    idpais: data.Medico?.Empleado.Paise ? data.Medico?.Empleado?.Paise?.Codigo : "PER",
                     idprofesion: data.Medico?.Empleado.TiposEmpleado.TipoEmpleadoHIS,
                     fechanacimiento: data.Medico?.Empleado.FechaNacimientoFormattedMedico,
                     nombres: data.Medico?.Empleado.Nombres.trim(),
@@ -1207,17 +1225,202 @@ const findByFechasPrueba2 = async (req, res = response) => {
                     idetnia: '58',
                     fechanacimiento: data.Paciente?.FechaNacimientoFormatted,
                     idestablecimiento: '00754',
-                    idpais: data.Paciente?.Paise.Codigo,
+                    idpais: data.Paciente?.Paise?.Codigo ? data.Paciente?.Paise?.Codigo : null ,
                     idsexo: data.Paciente?.TiposSexo.Descripcion.charAt(0).toUpperCase(),
                 },
             };
         });
-        res.status(200).json(dataPlana)
+        res.status(200).json(paciente)
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 }
 
+
+const findByIdCuentaAtencion = async (req, res) => {
+  const { _idcuenta } = req.params;
+ 
+  try {
+      
+   const paciente = await atenciones.findOne({
+      where: { IdCuentaAtencion: _idcuenta },
+      include: [
+        his_cuenta_cita,
+        {
+          model: atencionesCE,
+        },
+        {
+          model: Servicios,
+        },
+        {
+          model: FactOrdenServicio,
+          include: [{
+            model: FacturacionServicioFinanciamientos,
+            include: [FactCatalogoServicios]
+          }]
+        },
+        {
+          model: AtencionesDiagnosticos,
+          include: [SubclasificacionDiagnosticos, Diagnosticos]
+        },
+        {
+          model: Medicos,
+          include: [{
+            model: Empleados,
+            include: [TiposSexo, Paises, TiposEmpleado]
+          }]
+        },
+        {
+          model: Pacientes,
+          include: [TiposSexo, Paises],
+        }
+      ]
+    });
+
+    if (!paciente) {
+      return res.status(404).json({ message: 'Atención no encontrada' });
+    }
+    const pacientesArray = [paciente]; 
+
+   
+
+        const dataPlana = pacientesArray.map((data) => {
+            
+            const tipodiagnostico = [];
+            const idEmpleadoMedico = data.Medico.IdEmpleado;
+            data.FactOrdenServicios.forEach((FacturacionServicioFinanciamiento) => {
+                if(idEmpleadoMedico===FacturacionServicioFinanciamiento.IdUsuario){
+                FacturacionServicioFinanciamiento.FacturacionServicioFinanciamientos.forEach((data) => {
+                    data.FactCatalogoServicios.forEach((data) => {
+                       
+                        if (data?.Codigo != '99203') {
+                           /* tipodiagnostico.push({
+                                tipodiagnostico: "D",
+                                codigo: data.CodMINSA,
+                                tipoitem: "CP",
+                                codigolote: "",
+                            })*/
+                        }
+                    })
+                })}
+            })
+            const codigosUnicos = new Set();
+            data.AtencionesDiagnosticos.forEach((diagnostico) => {
+                const codigo = diagnostico.Diagnostico?.codigoCIEsinPto.trim();
+                if (codigo && !codigosUnicos.has(codigo)) {
+                    codigosUnicos.add(codigo);
+                    tipodiagnostico.push({
+                        tipo_diagnostico: diagnostico.SubclasificacionDiagnostico?.Codigo,
+                        diagnostico: diagnostico.Diagnostico?.codigoCIEsinPto.trim(),
+                        nro_diagnostico: "1"
+                    });
+                }
+
+
+                if (diagnostico.labConfHIS != null) {
+                    const item = tipodiagnostico.find(item => item.codigo === codigo);
+                    if (item) {
+                        if (!item.labs) {
+                            item.labs = [];
+                        }
+                        item.labs.push({
+                            codigo: "",
+                            valor: diagnostico.labConfHIS.trim()
+                        });
+                    }
+                }
+
+
+            });
+            return {
+                cita: {
+                    fecha_vencimiento_sis: "",
+                    id_financiador: '1',
+                    num_afil: "A",                  
+                },
+                datosContrareferencia:{
+                    calificacionReferencia:{
+                        calificacion:'J',
+                        calificacionComentario:'ddsadsa'
+                    },
+                    codEspecialidad	:'1-0008',
+                    condicion	:	'ME',
+                    desc_cartera_servicio	:''	,
+                    fechacontrareferencia	:	'20220902',
+                    fgRegistro	:	'4',
+                    horaContrareferencia	:	'16:00:00',
+                    idCarteraServicio	:	null,
+                    idEnvio	:	'C',
+                    idTipoAtencion	:	'C',
+                    idTipoTransporte	:	'T',
+                    idestabDestino	:	'6000',
+                    idestabOrigen	:	'7633',
+                    idreferencia	:	'1364666',
+                    idupsOrigen	:	'220100',
+                    idupsdestino	:	'220000',
+                    recomendacion	:	'demo recomendación'
+                },
+                diagnostico:tipodiagnostico,
+                fechaRegistro: data.his_cuenta_citum ? data.his_cuenta_citum?.fecha : "",
+               
+                
+                 paciente: {
+                    idtipodoc: data.Paciente?.IdDocIdentidadformated.toString(),
+                    numdoc: data.Paciente?.NroDocumento,
+                    apelpatpac: data.Paciente?.ApellidoPaterno,
+                    apelmatpac: data.Paciente?.ApellidoMaterno,
+                    nombpac: data.Paciente?.NombreCompleto.trim(),
+                    direccion:data.Paciente?.DireccionDomicilio ? data.Paciente?.DireccionDomicilio : "_",
+                    fechnacpac:data.Paciente?.FechaNacimientoFormatted,
+                    idsexo: data.Paciente?.TiposSexo.Descripcion.charAt(0).toUpperCase(),
+                    nrohis: data.Paciente?.NroHistoriaClinica,
+                    ubigeoactual:'140122',
+                    ubigeoreniec:'140122',
+                },
+                personal_registra: {
+                    apellidoMaterno: data.Medico?.Empleado.ApellidoMaterno,
+                    apellidoPaterno: data.Medico?.Empleado.ApellidoPaterno,
+                    fechanacimiento: data.Medico?.Empleado.FechaNacimientoFormattedMedico,
+                    idcolegio:'',
+                    idprofesion:'',
+                    nombres: data.Medico?.Empleado.Nombres.trim(),
+                    nroDocumento: data.Medico?.Empleado.DNI ? data.Medico?.Empleado.DNI.trim() : "",
+                    sexo: data.Medico?.Empleado.TiposSexo ? data.Medico?.Empleado.TiposSexo.Descripcion.charAt(0).toUpperCase() : "M",
+                    tipoDocumento: data.Medico?.Empleado.idTipoDocumentoformated.toString(),
+                },
+                responsableContrareferencia: {
+                    apelmatrefiere: "GRANDA",
+                    apelpatrefiere: "JIMENEZ",
+                    fechanacrefiere: "19661105",
+                    idcolegioref:"123456",
+                    idprofesionref:"1",
+                    idsexorefiere: "M",
+                    idtipodocref: "1",
+                    nombperrefiere: "NESTOR ABEL",
+                    numdocref: "10258720",
+                },
+                tratamiento:
+                    [
+                        {
+                        cantidad	:	'1',
+                        codigo_medicamento	:	'00095  ',
+                        frecuencia	:	'2 cada 8 horas',
+                        nro_diagnostico	:	1,
+                        nro_tratamiento	:	null,
+                        periodo	:	null,
+                        unidad_tiempo	:	null,
+                        }
+                    ]
+                ,
+
+               
+            };
+        });
+        res.status(200).json(dataPlana)
+  } catch (error) {
+    res.status(500).json({ message: 'Error al buscar cuenta de atención', error });
+  }
+};
 
 module.exports = {
     findAll,
@@ -1228,5 +1431,6 @@ module.exports = {
     enviarApiHisData,
     findByFechasPrueba,
     enviarhisprueba,
-    findByFechasPrueba2
+    findByFechasPrueba2,
+    findByIdCuentaAtencion
 }

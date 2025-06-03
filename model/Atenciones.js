@@ -25,6 +25,7 @@ const atenciones = SIGHBD.define('atenciones', {
     HoraIngreso: DataTypes.STRING,
     idFuenteFinanciamiento: DataTypes.STRING,
     FyHFinal:DataTypes.STRING,
+    IdCuentaAtencion:DataTypes.STRING,
     FechaAtencionFormatted: {
         type: DataTypes.VIRTUAL,
         get() {
@@ -143,6 +144,7 @@ atenciones.belongsTo(Servicios, {
 
 atenciones.hasMany(FactOrdenServicio, {
     foreignKey: 'IdCuentaAtencion',
+    sourceKey: 'IdCuentaAtencion'
 })
 
 
